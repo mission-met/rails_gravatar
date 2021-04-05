@@ -71,7 +71,7 @@ Testing
 License
 -----------------
 
-Please see [LICENSE](https://github.com/mission-met/rails_gravatar/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/mission-met/rails_gravatar/blob/master/LICENSE) for licensing details. This code is MIT licensed and will ALWAYS be MIT licensed.
 
 
 Author
