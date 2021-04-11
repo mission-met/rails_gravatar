@@ -5,7 +5,7 @@ require "rails_gravatar"
 
 describe RailsGravatar do
   describe ".src" do
-     it "works with email" do
+    it "works with email" do
       expect(
         RailsGravatar.src("me@email.com")
       ).to eq(
@@ -27,11 +27,11 @@ describe RailsGravatar do
       ).to eq(
         "//www.gravatar.com/avatar/8f9dc04e6abdcc9fea53e81945c7294b?s=32&d=http%3A%2F%2Femail.com%2Fimage.png"
       )
-   end
+    end
   end
 
   describe ".tag" do
-     it "works with email" do
+    it "works with email" do
       expect(
         RailsGravatar.tag("me@email.com")
       ).to eq(
@@ -62,6 +62,17 @@ describe RailsGravatar do
         RailsGravatar.prefetch_dns_tag
       ).to eq(
         "<link rel=\"dns-prefetch\" href=\"//gravatar.com\"></link>"
+      )
+    end
+  end
+
+  describe "Thredded usage" do
+    it "example src call" do
+      user = double(:user, id: 2, name: "Margret", email: "USER34@example.com", admin: false)
+      expect(
+        RailsGravatar.src(user.email, 156, "retro")
+      ).to eq(
+        "//www.gravatar.com/avatar/8b5770882d6991af57d599e502429380?s=156&d=retro"
       )
     end
   end

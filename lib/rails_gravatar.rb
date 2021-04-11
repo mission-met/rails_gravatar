@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "./version"
 require "digest/md5"
 require "cgi"
 require "action_view"
@@ -32,26 +33,38 @@ class RailsGravatar
   def src
     [
       "//www.gravatar.com/avatar/",
-      Digest::MD5.hexdigest(email_address.downcase.strip),
-      "?s=#{size.clamp(1, 2048)}",
-      fallback_image_url ? "&d=#{CGI.escape(fallback_image_url)}" : nil
+      email_address_digest,
+      "?",
+      size_param,
+      fallback_image_url_param
     ].join
-  rescue Exception => e
-    nil
+  end
+
+  def email_address_digest
+    Digest::MD5.hexdigest(email_address)
+  end
+
+  def email_address
+    @email_address.downcase.strip
+  end
+
+  def size_param
+    "s=#{size}"
+  end
+
+  def size
+    @size.clamp(1, 2048)
+  end
+
+  def fallback_image_url_param
+    @fallback_image_url ? "&d=#{CGI.escape(@fallback_image_url)}" : nil
   end
 
   def tag
-    content_tag(:img, nil, src: src, class: "gravatar", alt: alt_text)
+    content_tag(:img, nil, src: src, class: "gravatar", alt: @alt_text)
   end
 
   def prefetch_dns_tag
     content_tag(:link, nil, rel: "dns-prefetch", href: "//gravatar.com")
   end
-
-  private
-
-  attr_reader :email_address, :size, :fallback_image_url, :alt_text
 end
-
-
-
