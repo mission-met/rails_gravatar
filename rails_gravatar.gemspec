@@ -1,7 +1,10 @@
 # -*- encoding: utf-8 -*-
+
+require "./lib/version"
+
 Gem::Specification.new do |s|
   s.name        = "rails_gravatar"
-  s.version     = "1.0.0"
+  s.version     = RailsGravatar::VERSION
   s.date        = "2021-04-02"
   s.summary     = "rails-gravatar"
   s.description = "A simple gem for for generating Gravatar images and tags in a Rails environment."
