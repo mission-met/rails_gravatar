@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "./version"
 require "digest/md5"
 require "cgi"
 require "action_view"
