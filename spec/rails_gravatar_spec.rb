@@ -28,6 +28,23 @@ describe RailsGravatar do
         "//www.gravatar.com/avatar/8f9dc04e6abdcc9fea53e81945c7294b?s=32&d=http%3A%2F%2Femail.com%2Fimage.png"
       )
     end
+
+    describe "size" do
+      it "should force a size greater than 1" do
+        expect(
+          RailsGravatar.src("me@email.com", -1, "http://email.com/image.png")
+        ).to include (
+          "s=1"
+        )
+      end
+      it "should force a size less than 2048" do
+        expect(
+          RailsGravatar.src("me@email.com", 2080, "http://email.com/image.png")
+        ).to include (
+          "s=2048"
+        )
+      end
+    end
   end
 
   describe ".tag" do

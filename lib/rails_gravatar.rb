@@ -52,7 +52,13 @@ class RailsGravatar
   end
 
   def size
-    @size.clamp(1, 2048)
+    if @size < 1
+      1
+    elsif @size > 2048
+      2048
+    else
+      @size
+    end
   end
 
   def fallback_image_url_param
